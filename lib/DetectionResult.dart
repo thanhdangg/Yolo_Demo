@@ -18,7 +18,6 @@ class DetectionResult {
   });
 
   factory DetectionResult.fromJson(Map<String, dynamic> json) {
-    print("DetectionResult fromJson xmin: ${json['xmin']}, ymin: ${json['ymin']}, xmax: ${json['xmax']}, ymax: ${json['ymax']}, confidence: ${json['confidence']}, name: ${json['name']}");
     return DetectionResult(
       xmin: json['xmin'],
       ymin: json['ymin'],
