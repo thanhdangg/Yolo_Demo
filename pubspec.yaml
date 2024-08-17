@@ -17,6 +17,11 @@ dependencies:
 
 
   cupertino_icons: ^1.0.6
+  firebase_core: ^2.24.2
+  firebase_storage: ^11.7.7
+  image_editor: ^1.5.1
+  image_editor_plus: ^0.2.3
+  flutter_image_editor: ^2.1.0
 
 dev_dependencies:
   flutter_test:

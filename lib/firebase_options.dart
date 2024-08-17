@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'yolo-c6728.appspot.com',
     measurementId: 'G-JXG4JFW3Y5',
   );
+
 }

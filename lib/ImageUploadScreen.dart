@@ -16,16 +16,31 @@ class ImageUploadScreen extends StatefulWidget {
 class _ImageUploadScreenState extends State<ImageUploadScreen> {
   File? _image;
   List<DetectionResult>? _results;
+  bool _isPickingImage = false; 
 
-  Future<void> _pickImage(ImageSource camera) async {
-    final pickedFile = await ImagePicker().getImage(source: camera);
 
+  Future<void> _pickImage(ImageSource source) async {
+    if (_isPickingImage) return; 
     setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-        _results = null; // Reset results when a new image is picked
-      }
+      _isPickingImage = true;
     });
+
+    try {
+      final pickedFile = await ImagePicker().getImage(source: source);
+
+      setState(() {
+        if (pickedFile != null) {
+          _image = File(pickedFile.path);
+          _results = null; 
+        }
+      });
+    } catch (e) {
+      print('Error picking image: $e');
+    } finally {
+      setState(() {
+        _isPickingImage = false;
+      });
+    }
   }
 
   Future<void> _uploadImage() async {
@@ -39,7 +54,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
 
     if (response.statusCode == 200) {
       final responseBody = await response.stream.bytesToString();
-      print('Response Body: $responseBody'); // Debugging line
+      print('Response Body: $responseBody'); 
       final results = parseResults(responseBody);
       setState(() {
         _results = results;
